@@ -37,7 +37,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>fibo3</finalName>
+        <finalName>fibo</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
