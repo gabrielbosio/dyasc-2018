@@ -18,8 +18,8 @@ public class Bitacora {
     public static Bitacora obtenerInstancia() {
         return instancia;
     }
-
-    public String registrarEvento(String evento) {
+    
+    public synchronized String registrarEvento(String evento) {
         String eventoDecorado = decorarEvento(evento);
         eventos.add(eventoDecorado);
         
