@@ -5,13 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bitacora {
+    private static Bitacora instancia = new Bitacora();
     private List<String> eventos;
     private Salida[] salidas;
     
-    public Bitacora() {
+    private Bitacora() {
         String destino = System.getProperty("bitacora.destino");
         eventos = new ArrayList<>();
         salidas = ParserDeSalidas.parsear(destino);
+    }
+    
+    public static Bitacora obtenerInstancia() {
+        return instancia;
     }
 
     public String registrarEvento(String evento) {
