@@ -6,11 +6,22 @@ import org.junit.Test;
 public class BatallaNavalTest {
 	
 	@Test
-	public void alAtacarEnUnCasilleroDeUnTableroVacioDisparoEnAgua() {
-		Tablero tablero = new Tablero(8, 8);
+	public void alAtacarEnUnCasilleroDeUnTableroDeUnSoloCasilleroVacioDisparoEnAgua() {
+		Tablero tablero = new Tablero(1, 1);
 		
-		Resultado resultadoFila2Columna2 = tablero.atacarEn(2, 2);
+		Resultado resultadoDeAtaque = tablero.atacarEn(1, 1);
 		
-		Assert.assertEquals(Resultado.AGUA, resultadoFila2Columna2);
+		Assert.assertEquals(Resultado.AGUA, resultadoDeAtaque);
+	}
+	
+	@Test
+	public void elTableroDeUnCasilleroTieneUnBoteYLoAtacoYObtengoUnHundido() {
+		Tablero tablero = new Tablero(1, 1);
+		Resultado resultadoDeAtaque;
+		
+		tablero.agregar(1, 1, new Bote());
+		resultadoDeAtaque = tablero.atacarEn(1, 1);
+		
+		Assert.assertEquals(Resultado.HUNDIDO, resultadoDeAtaque);
 	}
 }

@@ -1,14 +1,19 @@
 package ar.edu.untref.dyasc;
 
 public class Tablero {
+	
+	private Resultado resultado;
 
 	public Tablero(int ancho, int alto) {
-		// TODO Auto-generated constructor stub
+		resultado = Resultado.AGUA;
 	}
 
 	public Resultado atacarEn(int x, int y) {
-		// TODO Auto-generated method stub
-		return Resultado.AGUA;
+		return resultado;
+	}
+
+	public void agregar(int x, int y, Bote bote) {
+		resultado = Resultado.HUNDIDO;
 	}
 
 }
