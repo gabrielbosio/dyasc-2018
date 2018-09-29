@@ -6,9 +6,7 @@ import org.junit.Test;
 public class BatallaNavalTest {
 
     @Test
-    public void alAtacarEnUnCasilleroDeUnTableroDeUnSoloCasilleroVacioDisparoEnAgua()
-            throws AtaqueFueraDelTableroException {
-
+    public void alAtacarEnUnCasilleroDeUnTableroDeUnSoloCasilleroVacioDisparoEnAgua() {
         Tablero tablero = new Tablero(1);
 
         Resultado resultadoDeAtaque = tablero.atacarEn(1, 1);
@@ -18,7 +16,7 @@ public class BatallaNavalTest {
 
     @Test
     public void elTableroDeUnCasilleroTieneUnBoteYLoAtacoYObtengoUnHundido()
-            throws AtaqueFueraDelTableroException, NavioFueraDeTableroException {
+            throws NavioFueraDeTableroException {
         
         Tablero tablero = new Tablero(1);
         tablero.agregar(FabricaDeNavios.crearBote(1, 1));
@@ -30,7 +28,7 @@ public class BatallaNavalTest {
 
     @Test
     public void elTableroDeCuatroCasillerosTieneDosBotesYAtacoTodosLosCasillerosYObtengoDosAguaYDosHundido()
-            throws AtaqueFueraDelTableroException, NavioFueraDeTableroException {
+            throws NavioFueraDeTableroException {
 
         Tablero tablero = new Tablero(2);
         tablero.agregar(FabricaDeNavios.crearBote(1, 1));
@@ -48,7 +46,7 @@ public class BatallaNavalTest {
     }
 
     @Test(expected = AtaqueFueraDelTableroException.class)
-    public void seIntentaAtacarFueraDelTablero() throws AtaqueFueraDelTableroException {
+    public void seIntentaAtacarFueraDelTablero() {
         Tablero tablero = new Tablero(4);
 
         tablero.atacarEn(5, 2);
@@ -56,7 +54,7 @@ public class BatallaNavalTest {
 
     @Test
     public void elCruceroEntraJustoDeFormaHorizontalEnElTableroYLoAtacoHastaHundirlo()
-            throws AtaqueFueraDelTableroException, NavioFueraDeTableroException {
+            throws NavioFueraDeTableroException {
 
         Tablero tablero = new Tablero(3);
         tablero.agregar(FabricaDeNavios.crearCrucero(1, 1, Direccion.HORIZONTAL));
@@ -72,7 +70,7 @@ public class BatallaNavalTest {
 
     @Test
     public void atacoHastaHundirloAUnCruceroColocadoDeFormaVerticalEnElTablero()
-            throws AtaqueFueraDelTableroException, NavioFueraDeTableroException {
+            throws NavioFueraDeTableroException {
         
         Tablero tablero = new Tablero(3);
         tablero.agregar(FabricaDeNavios.crearCrucero(1, 1, Direccion.VERTICAL));
@@ -87,9 +85,16 @@ public class BatallaNavalTest {
     }
 
     @Test(expected = NavioFueraDeTableroException.class)
-    public void intentoAgregarUnBoteFueraDelTablero() throws NavioFueraDeTableroException {
+    public void intentoAgregarUnBoteFueraDelTablero()  {
         Tablero tablero = new Tablero(2);
 
         tablero.agregar(FabricaDeNavios.crearBote(3, 1));
+    }
+    
+    @Test(expected = NavioFueraDeTableroException.class)
+    public void intentoAgregarUnCruceroParcialmenteFueraDelTablero() {
+        Tablero tablero = new Tablero(4);
+        
+        tablero.agregar(FabricaDeNavios.crearCrucero(3, 1, Direccion.HORIZONTAL));
     }
 }

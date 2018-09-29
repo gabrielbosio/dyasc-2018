@@ -41,13 +41,25 @@ public class Tablero {
         if (navio.direccion() == Direccion.HORIZONTAL) {
 
             for (int i = 0; i < navio.vidas(); i++) {
-                barcos.put(new Point(posicionX + i, posicionY), navio);
+                int posicionDesplazadaX = posicionX + i;
+                
+                if (posicionDesplazadaX > longitudDeLado) {
+                    throw new NavioFueraDeTableroException();
+                }
+                
+                barcos.put(new Point(posicionDesplazadaX, posicionY), navio);
             }
 
         } else if (navio.direccion() == Direccion.VERTICAL) {
 
             for (int i = 0; i < navio.vidas(); i++) {
-                barcos.put(new Point(posicionX, posicionY + i), navio);
+                int posicionDesplazadaY = posicionY + i;
+                
+                if (posicionDesplazadaY > longitudDeLado) {
+                    throw new NavioFueraDeTableroException();
+                }
+                
+                barcos.put(new Point(posicionX, posicionDesplazadaY), navio);
             }
         }
     }
