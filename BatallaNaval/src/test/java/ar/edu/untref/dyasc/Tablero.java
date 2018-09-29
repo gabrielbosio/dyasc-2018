@@ -14,8 +14,7 @@ public class Tablero {
         this.longitudDeLado = longitudDeLado;
     }
 
-    public Resultado atacarEn(int x, int y)
-            throws AtaqueFueraDelTableroException {
+    public Resultado atacarEn(int x, int y) throws AtaqueFueraDelTableroException {
 
         if (x > longitudDeLado || y > longitudDeLado) {
             throw new AtaqueFueraDelTableroException();
@@ -25,8 +24,6 @@ public class Tablero {
         Resultado resultado = Resultado.AGUA;
 
         if (victima != null) {
-            int xRelativo;
-            int yRelativo;
             resultado = victima.daniar(x, y);
         }
 
@@ -36,9 +33,18 @@ public class Tablero {
     public void agregar(Navio navio) {
         int posicionX = navio.posicionX();
         int posicionY = navio.posicionY();
-        
-        for (int i = 0; i < navio.vidas(); i++) {
-            barcos.put(new Point(posicionX + i, posicionY), navio);
+
+        if (navio.direccion() == Direccion.HORIZONTAL) {
+
+            for (int i = 0; i < navio.vidas(); i++) {
+                barcos.put(new Point(posicionX + i, posicionY), navio);
+            }
+
+        } else if (navio.direccion() == Direccion.VERTICAL) {
+
+            for (int i = 0; i < navio.vidas(); i++) {
+                barcos.put(new Point(posicionX, posicionY + i), navio);
+            }
         }
     }
 

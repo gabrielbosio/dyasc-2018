@@ -8,6 +8,7 @@ public class BatallaNavalTest {
     @Test
     public void alAtacarEnUnCasilleroDeUnTableroDeUnSoloCasilleroVacioDisparoEnAgua()
             throws AtaqueFueraDelTableroException {
+
         Tablero tablero = new Tablero(1);
 
         Resultado resultadoDeAtaque = tablero.atacarEn(1, 1);
@@ -28,6 +29,7 @@ public class BatallaNavalTest {
     @Test
     public void elTableroDeCuatroCasillerosTieneDosBotesYAtacoTodosLosCasillerosYObtengoDosAguaYDosHundido()
             throws AtaqueFueraDelTableroException {
+
         Tablero tablero = new Tablero(2);
         tablero.agregar(FabricaDeNavios.crearBote(1, 1));
         tablero.agregar(FabricaDeNavios.crearBote(2, 2));
@@ -53,8 +55,9 @@ public class BatallaNavalTest {
     @Test
     public void elCruceroEntraJustoDeFormaHorizontalEnElTableroYLoAtacoHastaHundirlo()
             throws AtaqueFueraDelTableroException {
+
         Tablero tablero = new Tablero(3);
-        tablero.agregar(FabricaDeNavios.crearCrucero(1, 1));
+        tablero.agregar(FabricaDeNavios.crearCrucero(1, 1, Direccion.HORIZONTAL));
 
         Resultado resultadoLadoOesteDeCrucero = tablero.atacarEn(1, 1);
         Resultado resultadoCentroDeCrucero = tablero.atacarEn(2, 1);
@@ -63,5 +66,19 @@ public class BatallaNavalTest {
         Assert.assertEquals(Resultado.TOCADO, resultadoLadoOesteDeCrucero);
         Assert.assertEquals(Resultado.TOCADO, resultadoCentroDeCrucero);
         Assert.assertEquals(Resultado.HUNDIDO, resultadoLadoEsteDeCrucero);
+    }
+
+    @Test
+    public void atacoHastaHundirloAUnCruceroColocadoDeFormaVerticalEnElTablero() throws AtaqueFueraDelTableroException {
+        Tablero tablero = new Tablero(3);
+        tablero.agregar(FabricaDeNavios.crearCrucero(1, 1, Direccion.VERTICAL));
+
+        Resultado resultadoLadoNorteDeCrucero = tablero.atacarEn(1, 1);
+        Resultado resultadoCentroDeCrucero = tablero.atacarEn(1, 2);
+        Resultado resultadoLadoSurDeCrucero = tablero.atacarEn(1, 3);
+
+        Assert.assertEquals(Resultado.TOCADO, resultadoLadoNorteDeCrucero);
+        Assert.assertEquals(Resultado.TOCADO, resultadoCentroDeCrucero);
+        Assert.assertEquals(Resultado.HUNDIDO, resultadoLadoSurDeCrucero);
     }
 }
