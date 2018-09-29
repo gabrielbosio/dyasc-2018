@@ -30,10 +30,14 @@ public class Tablero {
         return resultado;
     }
 
-    public void agregar(Navio navio) {
+    public void agregar(Navio navio) throws NavioFueraDeTableroException {
         int posicionX = navio.posicionX();
         int posicionY = navio.posicionY();
 
+        if (posicionX > longitudDeLado || posicionY > longitudDeLado) {
+            throw new NavioFueraDeTableroException();
+        }
+        
         if (navio.direccion() == Direccion.HORIZONTAL) {
 
             for (int i = 0; i < navio.vidas(); i++) {
