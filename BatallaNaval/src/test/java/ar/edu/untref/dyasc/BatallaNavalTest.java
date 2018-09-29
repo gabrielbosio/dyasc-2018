@@ -17,11 +17,27 @@ public class BatallaNavalTest {
 	@Test
 	public void elTableroDeUnCasilleroTieneUnBoteYLoAtacoYObtengoUnHundido() {
 		Tablero tablero = new Tablero(1, 1);
-		Resultado resultadoDeAtaque;
-		
 		tablero.agregar(1, 1, new Bote());
-		resultadoDeAtaque = tablero.atacarEn(1, 1);
+		
+		Resultado resultadoDeAtaque = tablero.atacarEn(1, 1);
 		
 		Assert.assertEquals(Resultado.HUNDIDO, resultadoDeAtaque);
+	}
+	
+	@Test
+	public void elTableroDeCuatroCasillerosTieneDosBotesYAtacoTodosLosCasillerosYObtengoDosAguaYDosHundido() {
+		Tablero tablero = new Tablero(2, 2);
+		tablero.agregar(1, 1, new Bote());
+		tablero.agregar(2, 2, new Bote());
+		
+		Resultado resultadoFila1Columna1 = tablero.atacarEn(1, 1);
+		Resultado resultadoFila1Columna2 = tablero.atacarEn(1, 2);
+		Resultado resultadoFila2Columna1 = tablero.atacarEn(2, 1);
+		Resultado resultadoFila2Columna2 = tablero.atacarEn(2, 2);
+		
+		Assert.assertEquals(Resultado.HUNDIDO, resultadoFila1Columna1);
+		Assert.assertEquals(Resultado.AGUA, resultadoFila1Columna2);
+		Assert.assertEquals(Resultado.AGUA, resultadoFila2Columna1);
+		Assert.assertEquals(Resultado.HUNDIDO, resultadoFila2Columna2);
 	}
 }
