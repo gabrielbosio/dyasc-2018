@@ -1,18 +1,19 @@
 package ar.edu.untref.dyasc;
 
+import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Tablero {
 	
-	private Map<Coordenada, Bote> barcos;
+	private Map<Point, Bote> barcos;
 
 	public Tablero(int ancho, int alto) {
 		barcos = new HashMap<>();
 	}
 
 	public Resultado atacarEn(int x, int y) {
-		Bote victima = barcos.get(new Coordenada(x, y));
+		Bote victima = barcos.get(new Point(x, y));
 		Resultado resultado;
 		
 		if (victima == null) {
@@ -26,7 +27,7 @@ public class Tablero {
 	}
 
 	public void agregar(int x, int y, Bote bote) {
-		barcos.put(new Coordenada(x, y), bote);
+		barcos.put(new Point(x, y), bote);
 	}
 
 }
