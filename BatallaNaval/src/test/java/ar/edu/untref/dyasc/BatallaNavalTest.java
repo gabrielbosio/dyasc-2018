@@ -6,7 +6,7 @@ import org.junit.Test;
 public class BatallaNavalTest {
 	
 	@Test
-	public void alAtacarEnUnCasilleroDeUnTableroDeUnSoloCasilleroVacioDisparoEnAgua() {
+	public void alAtacarEnUnCasilleroDeUnTableroDeUnSoloCasilleroVacioDisparoEnAgua() throws AtaqueFueraDelTableroException {
 		Tablero tablero = new Tablero(1, 1);
 		
 		Resultado resultadoDeAtaque = tablero.atacarEn(1, 1);
@@ -15,7 +15,7 @@ public class BatallaNavalTest {
 	}
 	
 	@Test
-	public void elTableroDeUnCasilleroTieneUnBoteYLoAtacoYObtengoUnHundido() {
+	public void elTableroDeUnCasilleroTieneUnBoteYLoAtacoYObtengoUnHundido() throws AtaqueFueraDelTableroException {
 		Tablero tablero = new Tablero(1, 1);
 		tablero.agregar(1, 1, new Bote());
 		
@@ -25,7 +25,7 @@ public class BatallaNavalTest {
 	}
 	
 	@Test
-	public void elTableroDeCuatroCasillerosTieneDosBotesYAtacoTodosLosCasillerosYObtengoDosAguaYDosHundido() {
+	public void elTableroDeCuatroCasillerosTieneDosBotesYAtacoTodosLosCasillerosYObtengoDosAguaYDosHundido() throws AtaqueFueraDelTableroException {
 		Tablero tablero = new Tablero(2, 2);
 		tablero.agregar(1, 1, new Bote());
 		tablero.agregar(2, 2, new Bote());
@@ -39,5 +39,12 @@ public class BatallaNavalTest {
 		Assert.assertEquals(Resultado.AGUA, resultadoFila1Columna2);
 		Assert.assertEquals(Resultado.AGUA, resultadoFila2Columna1);
 		Assert.assertEquals(Resultado.HUNDIDO, resultadoFila2Columna2);
+	}
+	
+	@Test(expected = AtaqueFueraDelTableroException.class)
+	public void seIntentaAtacarFueraDelTablero() throws AtaqueFueraDelTableroException {
+		Tablero tablero = new Tablero(4, 4);
+		
+		tablero.atacarEn(5, 2);
 	}
 }
