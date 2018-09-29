@@ -5,39 +5,41 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Tablero {
-	
-	private Map<Point, Bote> barcos;
-	private int ancho;
-	private int alto;
 
-	public Tablero(int ancho, int alto) {
-		barcos = new HashMap<>();
-		this.ancho = ancho;
-		this.alto = alto;
-	}
+    private Map<Point, Navio> barcos;
+    private int longitudDeLado;
 
-	public Resultado atacarEn(int x, int y)
-			throws AtaqueFueraDelTableroException {
-		
-		if (x > ancho || y > alto) {
-			throw new AtaqueFueraDelTableroException();
-		}
-		
-		Bote victima = barcos.get(new Point(x, y));
-		Resultado resultado;
-		
-		if (victima == null) {
-			resultado = Resultado.AGUA;
-		
-		} else {	
-			resultado = victima.atacar();
-		}
-		
-		return resultado;
-	}
+    public Tablero(int longitudDeLado) {
+        barcos = new HashMap<>();
+        this.longitudDeLado = longitudDeLado;
+    }
 
-	public void agregar(int x, int y, Bote bote) {
-		barcos.put(new Point(x, y), bote);
-	}
+    public Resultado atacarEn(int x, int y)
+            throws AtaqueFueraDelTableroException {
+
+        if (x > longitudDeLado || y > longitudDeLado) {
+            throw new AtaqueFueraDelTableroException();
+        }
+
+        Navio victima = barcos.get(new Point(x, y));
+        Resultado resultado = Resultado.AGUA;
+
+        if (victima != null) {
+            int xRelativo;
+            int yRelativo;
+            resultado = victima.daniar(x, y);
+        }
+
+        return resultado;
+    }
+
+    public void agregar(Navio navio) {
+        int posicionX = navio.posicionX();
+        int posicionY = navio.posicionY();
+        
+        for (int i = 0; i < navio.vidas(); i++) {
+            barcos.put(new Point(posicionX + i, posicionY), navio);
+        }
+    }
 
 }
