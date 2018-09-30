@@ -14,7 +14,7 @@ public class Tablero {
         this.longitudDeLado = longitudDeLado;
     }
 
-    public Resultado atacarEn(int x, int y) throws AtaqueFueraDelTableroException {
+    public Resultado atacarEn(int x, int y) {
 
         if (x > longitudDeLado || y > longitudDeLado) {
             throw new AtaqueFueraDelTableroException();
@@ -30,7 +30,7 @@ public class Tablero {
         return resultado;
     }
 
-    public void agregar(Navio navio) throws NavioFueraDeTableroException {
+    public void agregar(Navio navio) throws NavioFueraDeTableroException, CasilleroYaOcupadoException {
         int posicionX = navio.posicionX();
         int posicionY = navio.posicionY();
 
@@ -41,27 +41,36 @@ public class Tablero {
         if (navio.direccion() == Direccion.HORIZONTAL) {
 
             for (int i = 0; i < navio.vidas(); i++) {
-                int posicionDesplazadaX = posicionX + i;
-                
-                if (posicionDesplazadaX > longitudDeLado) {
-                    throw new NavioFueraDeTableroException();
-                }
-                
-                barcos.put(new Point(posicionDesplazadaX, posicionY), navio);
+                ocuparCasillero(navio, posicionX, posicionY, i, 0);
             }
 
         } else if (navio.direccion() == Direccion.VERTICAL) {
 
             for (int i = 0; i < navio.vidas(); i++) {
-                int posicionDesplazadaY = posicionY + i;
-                
-                if (posicionDesplazadaY > longitudDeLado) {
-                    throw new NavioFueraDeTableroException();
-                }
-                
-                barcos.put(new Point(posicionX, posicionDesplazadaY), navio);
+                ocuparCasillero(navio, posicionX, posicionY, 0, i);
             }
         }
     }
 
+    private void ocuparCasillero(Navio navio, int posicionX, int posicionY, int desplazamientoX,
+            int desplazamientoY) throws CasilleroYaOcupadoException {
+        
+        int posicionDesplazadaX = posicionX + desplazamientoX;
+        int posicionDesplazadaY = posicionY + desplazamientoY;
+        Point posicionDesplazada;
+        Navio navioEnConflicto;
+        
+        if (posicionDesplazadaX > longitudDeLado || posicionDesplazadaY > longitudDeLado) {
+            throw new NavioFueraDeTableroException();
+        }
+        
+        posicionDesplazada = new Point(posicionDesplazadaX, posicionDesplazadaY);
+        navioEnConflicto = barcos.put(posicionDesplazada, navio);
+        
+        if (navioEnConflicto != null) {
+            barcos.put(posicionDesplazada, navioEnConflicto);
+            throw new CasilleroYaOcupadoException();
+        }
+    }
+    
 }
