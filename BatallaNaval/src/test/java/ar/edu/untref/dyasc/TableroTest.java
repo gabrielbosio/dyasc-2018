@@ -3,7 +3,7 @@ package ar.edu.untref.dyasc;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class BatallaNavalTest {
+public class TableroTest {
 
     @Test
     public void alAtacarEnUnCasilleroDeUnTableroDeUnSoloCasilleroVacioDisparoEnAgua() {
