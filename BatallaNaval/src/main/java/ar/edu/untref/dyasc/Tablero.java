@@ -6,11 +6,11 @@ import java.util.Map;
 
 public class Tablero {
 
-    private Map<Point, Navio> barcos;
+    private Map<Point, Navio> mapaDeNavios;
     private int longitudDeLado;
 
     public Tablero(int longitudDeLado) {
-        barcos = new HashMap<>();
+        mapaDeNavios = new HashMap<>();
         this.longitudDeLado = longitudDeLado;
     }
 
@@ -20,7 +20,7 @@ public class Tablero {
             throw new AtaqueFueraDelTableroException();
         }
 
-        Navio victima = barcos.get(new Point(x, y));
+        Navio victima = mapaDeNavios.get(new Point(x, y));
         Resultado resultado = Resultado.AGUA;
 
         if (victima != null) {
@@ -65,10 +65,10 @@ public class Tablero {
         }
         
         posicionDesplazada = new Point(posicionDesplazadaX, posicionDesplazadaY);
-        navioEnConflicto = barcos.put(posicionDesplazada, navio);
+        navioEnConflicto = mapaDeNavios.put(posicionDesplazada, navio);
         
         if (navioEnConflicto != null) {
-            barcos.put(posicionDesplazada, navioEnConflicto);
+            mapaDeNavios.put(posicionDesplazada, navioEnConflicto);
             throw new CasilleroYaOcupadoException();
         }
     }
