@@ -4,14 +4,38 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class InterpreteTest {
-    
+
     @Test
     public void ingresoLasCoordenadasAUnoEnMinusculaTodoJuntoYObtengoElParUnoUno() {
         String entrada = "a1";
-        
+
         Coordenada salidaActual = Interprete.procesar(entrada);
-        Coordenada salidaEsperada = new Coordenada(1, 1);
-        
-        Assert.assertEquals(salidaEsperada, salidaActual);
+
+        Assert.assertEquals(1, salidaActual.x());
+        Assert.assertEquals(1, salidaActual.y());
+    }
+
+    @Test
+    public void conLasCoordenadasADosEnMinusculaTodoJuntoComoEntradaObtengoElParUnoDos() {
+        String entrada = "a2";
+
+        Coordenada salidaActual = Interprete.procesar(entrada);
+
+        Assert.assertEquals(1, salidaActual.x());
+        Assert.assertEquals(2, salidaActual.y());
+    }
+
+    @Test(expected = LongitudInvalidaException.class)
+    public void noPuedoIngresarUnaCoordenadaNumericaDeMasDeUnaCifra() {
+        String entrada = "a10";
+
+        Interprete.procesar(entrada);
+    }
+
+    @Test(expected = CaracterInvalidoException.class)
+    public void ingresoUnCaracterQueNoEsLetraYObtengoUnaExcepcion() {
+        String entrada = "$5";
+
+        Interprete.procesar(entrada);
     }
 }
