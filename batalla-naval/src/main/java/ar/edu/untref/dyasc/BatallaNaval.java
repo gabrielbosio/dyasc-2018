@@ -8,6 +8,7 @@ public class BatallaNaval {
 
     private static final int TAMANIO_TABLERO = 8;
     private static int naviosRestantes;
+    private static int intentos;
 
     public static void main(String[] args) {
         Tablero tablero = new Tablero(TAMANIO_TABLERO);
@@ -26,7 +27,7 @@ public class BatallaNaval {
                 
                 if (seDebeCrearNavio) {
                     Navio nuevoNavio;
-                    boolean seCreaUnCrucero = Math.random() > 0.7;
+                    boolean seCreaUnCrucero = Math.random() > 0.3;
 
                     if (seCreaUnCrucero) {
                         Direccion direccion = Direccion.HORIZONTAL;
@@ -59,6 +60,7 @@ public class BatallaNaval {
         try {
             String coordenadas = lector.readLine();
             Resultado resultado = tablero.dispararEn(Interprete.procesar(coordenadas));
+            intentos++;
             
             if (resultado == Resultado.HUNDIDO) {
                 naviosRestantes--;
@@ -68,6 +70,7 @@ public class BatallaNaval {
 
             if (naviosRestantes == 0) {
                 System.out.println("Hundiste todos los barcos!");
+                System.out.println("Intentos: " + intentos);
                 debeSeguirElLoop = false;
             }
             
@@ -76,6 +79,11 @@ public class BatallaNaval {
             
         } catch (AtaqueFueraDelTableroException e) {
             System.out.println("No se puede disparar fuera del tablero.");
+        
+        } catch (CaracterInvalidoException | LongitudInvalidaException e) {
+            System.out.println("La entrada debe ser: %c%d, donde:");
+            System.out.println("%c es una letra entre a y h.");
+            System.out.println("%d es un número entre 1 y 8.");
         }
         
         return debeSeguirElLoop;
