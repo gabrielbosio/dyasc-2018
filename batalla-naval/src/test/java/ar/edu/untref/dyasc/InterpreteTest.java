@@ -38,4 +38,11 @@ public class InterpreteTest {
 
         Interprete.procesar(entrada);
     }
+    
+    @Test(expected = LongitudInvalidaException.class)
+    public void noPuedoNoIngresarNada() {
+        String entrada = "";
+        
+        Interprete.procesar(entrada);
+    }
 }

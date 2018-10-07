@@ -6,7 +6,7 @@ public class Interprete {
     
     public static Coordenada procesar(String entrada) {
         
-        if (entrada.length() > 2) {
+        if (entrada.length() == 0 || entrada.length() > 2) {
             throw new LongitudInvalidaException();
         }
 

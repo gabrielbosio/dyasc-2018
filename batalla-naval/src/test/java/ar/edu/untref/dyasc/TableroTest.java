@@ -92,7 +92,7 @@ public class TableroTest {
     }
     
     @Test(expected = NavioFueraDeTableroException.class)
-    public void intentoAgregarUnCruceroParcialmenteFueraDelTablero() throws NavioFueraDeTableroException, CasilleroYaOcupadoException {
+    public void intentoAgregarUnCruceroConDosCasillerosDeDistanciaFueraDelTablero() throws NavioFueraDeTableroException, CasilleroYaOcupadoException {
         Tablero tablero = new Tablero(4);
         
         tablero.agregar(FabricaDeNavios.crearCrucero(3, 1, Direccion.HORIZONTAL));
