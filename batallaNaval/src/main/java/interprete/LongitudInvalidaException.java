@@ -1,4 +1,4 @@
-package ar.edu.untref.dyasc;
+package interprete;
 
 @SuppressWarnings("serial")
 public class LongitudInvalidaException extends RuntimeException {

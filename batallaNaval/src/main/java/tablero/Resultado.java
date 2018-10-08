@@ -1,4 +1,4 @@
-package ar.edu.untref.dyasc;
+package tablero;
 
 public enum Resultado {
     AGUA, HUNDIDO, TOCADO

@@ -1,4 +1,4 @@
-package ar.edu.untref.dyasc;
+package tablero;
 
 import java.awt.Point;
 

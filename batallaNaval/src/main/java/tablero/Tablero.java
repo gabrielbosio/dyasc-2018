@@ -1,8 +1,10 @@
-package ar.edu.untref.dyasc;
+package tablero;
 
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
+
+import ar.edu.untref.dyasc.Coordenada;
 
 public class Tablero {
 

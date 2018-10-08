@@ -3,6 +3,14 @@ package ar.edu.untref.dyasc;
 import org.junit.Assert;
 import org.junit.Test;
 
+import tablero.AtaqueFueraDelTableroException;
+import tablero.CasilleroYaOcupadoException;
+import tablero.Direccion;
+import tablero.FabricaDeNavios;
+import tablero.NavioFueraDeTableroException;
+import tablero.Resultado;
+import tablero.Tablero;
+
 public class TableroTest {
 
     @Test

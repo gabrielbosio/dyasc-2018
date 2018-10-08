@@ -3,6 +3,10 @@ package ar.edu.untref.dyasc;
 import org.junit.Assert;
 import org.junit.Test;
 
+import interprete.CaracterInvalidoException;
+import interprete.Interprete;
+import interprete.LongitudInvalidaException;
+
 public class InterpreteTest {
 
     @Test

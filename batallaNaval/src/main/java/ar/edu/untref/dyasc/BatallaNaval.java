@@ -4,6 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import interprete.CaracterInvalidoException;
+import interprete.Interprete;
+import interprete.LongitudInvalidaException;
+import tablero.AtaqueFueraDelTableroException;
+import tablero.CasilleroYaOcupadoException;
+import tablero.Direccion;
+import tablero.FabricaDeNavios;
+import tablero.Navio;
+import tablero.NavioFueraDeTableroException;
+import tablero.Resultado;
+import tablero.Tablero;
+
 public class BatallaNaval {
 
     private static final int TAMANIO_TABLERO = 8;

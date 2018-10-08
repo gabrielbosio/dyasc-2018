@@ -1,4 +1,6 @@
-package ar.edu.untref.dyasc;
+package interprete;
+
+import ar.edu.untref.dyasc.Coordenada;
 
 public class Interprete {
 
